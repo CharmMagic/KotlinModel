@@ -14,5 +14,6 @@ import com.example.kotlinmodel.net.RetrofitManager
 class MainService : BaseService() {
     suspend fun postLogin(account: String, password: String): ResponseData<LoginBean> = request {
         RetrofitManager.service.login("APP", "100", account, password)
+        //换肤大师发挥地方叫啥了
     }
 }
