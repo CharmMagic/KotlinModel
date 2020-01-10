@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">KotlinModel</string>
+    <string name="service_error">服务器未响应</string>
+</resources>
