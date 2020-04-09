@@ -4,6 +4,7 @@ import org.junit.Test
 
 import org.junit.Assert.*
 import java.security.MessageDigest
+import kotlin.math.sqrt
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -18,15 +19,13 @@ class ExampleUnitTest {
 
     @Test
     fun action() {
-        val str = "123456"
-        val md5 = md5(str)
-        println(md5)
-        println(md5.toCharArray().size)
-        val sha1 = sha1(str)
-        println(sha1.toCharArray().size)
+        val a = 3.0
+        val b = 4.0
+        val c = a*a +b*b
+        val d:Double = 4.2389
+        println("值==$d")
 
-        val sha256 = sha256(str)
-        println(sha256)
+
     }
 
     /**
@@ -59,13 +58,13 @@ class ExampleUnitTest {
         return result
     }
 
-    fun sha1(str:String): String {
+    fun sha1(str: String): String {
         val digest = MessageDigest.getInstance("SHA-1")
         val result = digest.digest(str.toByteArray())
         return toHex(result)
     }
 
-    fun sha256(str:String): String {
+    fun sha256(str: String): String {
         val digest = MessageDigest.getInstance("SHA-256")
         val result = digest.digest(str.toByteArray())
         return toHex(result)

@@ -1,14 +1,12 @@
 package com.example.kotlinmodel.net
 
-import android.util.Log
 import com.example.kotlinmodel.common.ApiService
 import com.example.kotlinmodel.common.Constants
 import com.example.kotlinmodel.common.HttpApi
-import com.example.kotlinmodel.utils.HttpSha1
+import com.example.kotlinmodel.utils.HttpSha1.getHttpSigString
+import com.example.kotlinmodel.utils.HttpSha1.getSha1
 import com.example.kotlinmodel.utils.Preference
 import com.example.kotlinmodel.utils.TimeUtils
-import com.example.kotlinmodel.widget.ContextConstant.TAG
-import com.google.gson.GsonBuilder
 import okhttp3.*
 import okio.Buffer
 import retrofit2.Retrofit
@@ -206,13 +204,13 @@ object RetrofitManager {
                 //7c4a8d09ca3762af61e59520943dc26494f8941b
                 newBuilder.addEncodedQueryParameter(
                     "sig",
-                    HttpSha1.getSha1(HttpSha1.getHttpSigString(paramsMap, token, baseUrl, jsonBody))
+                    getSha1(getHttpSigString(paramsMap, token, baseUrl, jsonBody))
                 )
                 request = request.newBuilder().url(newBuilder.build()).build()
-                println("sig测试${HttpSha1.getHttpSigString(paramsMap, token, baseUrl, jsonBody)}")
+                println("sig测试${getHttpSigString(paramsMap, token, baseUrl, jsonBody)}")
                 println(
-                    "sig校验${HttpSha1.getSha1(
-                        HttpSha1.getHttpSigString(
+                    "sig校验${getSha1(
+                        getHttpSigString(
                             paramsMap,
                             token,
                             baseUrl,

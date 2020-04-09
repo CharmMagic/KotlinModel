@@ -42,21 +42,20 @@ object HttpSha1 {
     }
 
 
-    fun toHex(byteArray: ByteArray): String {
-        val result = with(StringBuilder()) {
+    private fun toHex(byteArray: ByteArray): String {
+        //转成16进制后是32字节
+        return with(StringBuilder()) {
             byteArray.forEach {
                 val hex = it.toInt() and (0xFF)
                 val hexStr = Integer.toHexString(hex)
                 if (hexStr.length == 1) {
-                    this.append("0").append(hexStr)
+                    append("0").append(hexStr)
                 } else {
-                    this.append(hexStr)
+                    append(hexStr)
                 }
             }
-            this.toString()
+            toString()
         }
-        //转成16进制后是32字节
-        return result
     }
 
 }

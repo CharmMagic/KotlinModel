@@ -4,17 +4,18 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStoreOwner
 import com.example.kotlinmodel.R
 import com.example.kotlinmodel.net.ApiException
+import com.example.kotlinmodel.widget.LoadingDialog
 import com.example.kotlinmodel.widget.showToast
 import retrofit2.HttpException
 
 
-abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity(), ViewModelStoreOwner {
+abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
     protected lateinit var viewModel: VM
     private var isLoading = true
     private var isToast = true
+    private val loadingDialog by lazy { LoadingDialog(this) }
     override fun onCreate(savedInstanceState: Bundle?) {
         initVM()
         super.onCreate(savedInstanceState)
@@ -39,7 +40,11 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity(), ViewModel
     private fun startObserve() {
         viewModel.run {
             //加载
-            getLoad().observe(this@BaseActivity, Observer { this@BaseActivity.isLoading = it })
+            getLoad().observe(this@BaseActivity, Observer {
+                this@BaseActivity.isLoading = it
+//                loadingDialog.show()
+
+            })
 
             //Toast
             getToast().observe(this@BaseActivity, Observer { this@BaseActivity.isToast = it })
@@ -57,6 +62,10 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity(), ViewModel
                         println(it.printStackTrace())
                     }
                 }
+            })
+
+            getEnd().observe(this@BaseActivity, Observer {
+
             })
 
         }
