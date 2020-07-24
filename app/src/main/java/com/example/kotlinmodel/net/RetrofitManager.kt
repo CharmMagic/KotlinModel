@@ -8,6 +8,7 @@ import com.example.kotlinmodel.utils.HttpSha1.getSha1
 import com.example.kotlinmodel.utils.Preference
 import com.example.kotlinmodel.utils.TimeUtils
 import okhttp3.*
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okio.Buffer
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -47,13 +48,13 @@ object RetrofitManager {
             .addInterceptor(logInterceptor()) //日志,所有的请求响应度看到
             .retryOnConnectionFailure(false)
             .cookieJar(object : CookieJar {
-                var cookMap = HashMap<String, MutableList<Cookie>>()
-                override fun saveFromResponse(url: HttpUrl, cookies: MutableList<Cookie>) {
-                    cookMap[url.host()] = cookies
+                var cookMap = HashMap<String, List<Cookie>>()
+                override fun saveFromResponse(url: HttpUrl, cookies: List<Cookie>) {
+                    cookMap[url.host] = cookies
                 }
 
-                override fun loadForRequest(url: HttpUrl): MutableList<Cookie> {
-                    var cookies = cookMap[url.host()]
+                override fun loadForRequest(url: HttpUrl): List<Cookie> {
+                    var cookies = cookMap[url.host]
                     return if (cookies.isNullOrEmpty()) arrayListOf() else cookies
                 }
 
@@ -96,16 +97,16 @@ object RetrofitManager {
                 var headValue = headers[0]
                 var newBaseUrl: HttpUrl
                 newBaseUrl = when (headValue) {
-                    HttpApi.UPDOWNLOAD_KEY -> HttpUrl.parse(HttpApi.APPUP_IP)!!
-                    else -> HttpUrl.parse(HttpApi.URL_BASE_TEST_IP)!!
+                    HttpApi.UPDOWNLOAD_KEY -> HttpApi.APPUP_IP.toHttpUrlOrNull()!!
+                    else -> HttpApi.URL_BASE_TEST_IP.toHttpUrlOrNull()!!
                 }
 
-                var oldHttpUrl = request.url()
+                var oldHttpUrl = request.url
                 var newFullUrl = oldHttpUrl
                     .newBuilder()
-                    .scheme(newBaseUrl.scheme())
-                    .host(newBaseUrl.host())
-                    .port(newBaseUrl.port())
+                    .scheme(newBaseUrl.scheme)
+                    .host(newBaseUrl.host)
+                    .port(newBaseUrl.port)
                     .build()
                 var splitUrl = newFullUrl.toString().split(HttpApi.URL_BASE_TEST_IP)
                 chain.proceed(newBuilder.url(splitUrl[0] + "/api/" + splitUrl[1]).build())
@@ -125,7 +126,7 @@ object RetrofitManager {
     private fun addQueryParameterInterceptor(): Interceptor {
         return Interceptor { chain ->
             var request = chain.request()
-            var httpUrl = request.url()
+            var httpUrl = request.url
             var headers = request.headers("sigUrl")
             if (!headers.isNullOrEmpty()) {
                 var baseUrl = "${HttpApi.URL_BASE_PREFIX}${headers[0]}"
@@ -167,19 +168,19 @@ object RetrofitManager {
                     newBuilder.addEncodedQueryParameter(key, value)
                 }
 
-                when (request.method()) {
+                when (request.method) {
                     "GET" -> {
-                        var queryParameterNames = httpUrl.queryParameterNames()
+                        var queryParameterNames = httpUrl.queryParameterNames
                         for (key in queryParameterNames) {
                             paramsMap[key] = httpUrl.queryParameter(key) ?: ""
                         }
                     }
 
                     "POST" -> {
-                        var body = request.body()
+                        var body = request.body
                         body?.let {
                             if (body is FormBody) {
-                                repeat(body.size()) {
+                                repeat(body.size) {
                                     paramsMap[body.encodedName(it)] = body.encodedValue(it)
                                 }
                             } else {
@@ -229,7 +230,7 @@ object RetrofitManager {
     fun logInterceptor(): Interceptor {
         return Interceptor { chain ->
             val request = chain.request()
-            val requestBody = request.body()
+            val requestBody = request.body
             var body: String? = null
             requestBody?.let {
                 val buffer = Buffer()
@@ -243,16 +244,16 @@ object RetrofitManager {
             }
 
             println(
-                "发送请求: method：" + request.method()
-                        + "\nurl：" + request.url()
-                        + "\n请求头：" + request.headers()
+                "发送请求: method：" + request.method
+                        + "\nurl：" + request.url
+                        + "\n请求头：" + request.headers
                         + "\n请求参数: " + body)
 
             val startNs = System.nanoTime()
             val response = chain.proceed(request)
             val tookMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNs)
 
-            val responseBody = response.body()
+            val responseBody = response.body
             val rBody: String
 
             val source = responseBody!!.source()
@@ -270,8 +271,8 @@ object RetrofitManager {
             }
             rBody = buffer.clone().readString(charset!!)
 
-            println("收到响应: code:" + response.code()
-                        + "\n请求url：" + response.request().url()
+            println("收到响应: code:" + response.code
+                        + "\n请求url：" + response.request.url
                         + "\n请求body：" + body
                         + "\nResponse: " + rBody)
 

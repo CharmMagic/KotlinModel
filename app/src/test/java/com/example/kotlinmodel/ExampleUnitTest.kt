@@ -23,7 +23,16 @@ class ExampleUnitTest {
         val b = 4.0
         val c = a*a +b*b
         val d:Double = 4.2389
-        println("值==$d")
+        var e = arrayListOf<String>().apply {
+            add("1")
+            add("2")
+            add("3")
+            add("4")
+            add("5")
+        }
+        e.drop(1).flatMap { arrayListOf(it) }.forEach {
+            println(it)
+        }
 
 
     }

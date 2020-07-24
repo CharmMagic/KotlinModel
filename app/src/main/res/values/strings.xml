@@ -2,4 +2,7 @@
     <string name="app_name">KotlinModel</string>
     <string name="service_error">服务器未响应</string>
     <string name="loading">加载中...</string>
+    <string name="tab_one">课堂</string>
+    <string name="tab_two">新闻</string>
+    <string name="once_again_exit_app">再按一次推出程序</string>
 </resources>

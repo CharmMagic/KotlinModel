@@ -2,6 +2,7 @@ package com.example.kotlinmodel
 
 import android.app.Application
 import android.content.Context
+import com.tencent.bugly.crashreport.CrashReport
 import kotlin.properties.Delegates
 
 /**
@@ -20,5 +21,6 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         context = applicationContext
+        CrashReport.initCrashReport(applicationContext, "1d38863ec4", false)
     }
 }
