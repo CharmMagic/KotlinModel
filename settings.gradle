@@ -1,2 +1,4 @@
+include ':mywebview'
+include ':BGABannerLibrary'
 include ':app'
 rootProject.name='KotlinModel'

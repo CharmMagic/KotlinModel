@@ -15,7 +15,7 @@ class NewShopDialog(context: Context) : Dialog(context) {
     private val mainService by lazy { MainService() }
     init {
        lauch {
-          val result =  mainService.postLogin("lbdfws", HttpSha1.getSha1("123456"))
+          val result =  mainService.postLogin("1661234123412", HttpSha1.getSha1("123456"))
 
        }
     }

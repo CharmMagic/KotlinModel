@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.*
 import com.example.kotlinmodel.base.BaseVMActivity
 import com.example.kotlinmodel.bean.Tab
+import com.example.kotlinmodel.fragment.MyFragment
 import com.example.kotlinmodel.fragment.NewsFragment
 import com.example.kotlinmodel.fragment.SchoolFragment
 import com.example.kotlinmodel.viewmodel.MainViewModel
@@ -24,17 +25,21 @@ class MainActivity : BaseVMActivity<MainViewModel>() {
     private lateinit var mInflater: LayoutInflater
     override fun initView() {
         initTab()
+
     }
 
     override fun initData() {
+
     }
 
     //初始化Tab栏
     private fun initTab() {
         val tabHome = Tab(R.drawable.app_tab_1, R.string.tab_one, SchoolFragment::class.java)
         val tabLocal = Tab(R.drawable.app_tab_2, R.string.tab_two, NewsFragment::class.java)
+        val tabMine = Tab(R.drawable.app_tab_3, R.string.tab_three, MyFragment::class.java)
         mTabs.add(tabHome)
         mTabs.add(tabLocal)
+        mTabs.add(tabMine)
         mTabHost = findViewById<View>(R.id.tabhost) as FragmentTabHost
         mTabHost.setup(this, supportFragmentManager, R.id.fl_main_content)
         mInflater = LayoutInflater.from(this)
@@ -63,7 +68,11 @@ class MainActivity : BaseVMActivity<MainViewModel>() {
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (KeyEvent.KEYCODE_BACK == keyCode) {
             if (System.currentTimeMillis() - preTime > 2000) {
-                Toast.makeText(this@MainActivity, getString(R.string.once_again_exit_app), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@MainActivity,
+                    getString(R.string.once_again_exit_app),
+                    Toast.LENGTH_SHORT
+                ).show()
                 preTime = System.currentTimeMillis()
             } else {
                 finish()

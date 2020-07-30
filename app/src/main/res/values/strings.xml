@@ -5,4 +5,5 @@
     <string name="tab_one">课堂</string>
     <string name="tab_two">新闻</string>
     <string name="once_again_exit_app">再按一次推出程序</string>
+    <string name="tab_three">我的</string>
 </resources>

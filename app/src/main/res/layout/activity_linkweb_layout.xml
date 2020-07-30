@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_top_title"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="#fa6400"
+        android:gravity="bottom|center_horizontal"
+        android:paddingBottom="8dp"
+        android:text="健身课堂"
+        android:textColor="@color/cl_ffffff"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.frame.mywebview.webview.ProgressWebView
+        android:id="@+id/web_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent "
+        app:layout_constraintTop_toBottomOf="@+id/tv_top_title" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

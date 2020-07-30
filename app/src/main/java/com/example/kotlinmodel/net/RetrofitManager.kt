@@ -42,9 +42,9 @@ object RetrofitManager {
 //        val cacheFile = File(MyApplication.context.cacheDir, "cache")
 //        val cache = Cache(cacheFile, 1024 * 1024 * 50) //50Mb 缓存的大小
         return OkHttpClient.Builder()
-            .addInterceptor(mutiBaseUrlInterceptor())
-            .addInterceptor(addQueryParameterInterceptor())
-            .addInterceptor(baseRequestHeaderInterceptor())
+//            .addInterceptor(mutiBaseUrlInterceptor())
+//            .addInterceptor(addQueryParameterInterceptor())
+//            .addInterceptor(baseRequestHeaderInterceptor())
             .addInterceptor(logInterceptor()) //日志,所有的请求响应度看到
             .retryOnConnectionFailure(false)
             .cookieJar(object : CookieJar {

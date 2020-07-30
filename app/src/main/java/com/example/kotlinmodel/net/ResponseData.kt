@@ -7,3 +7,5 @@ package com.example.kotlinmodel.net
  *@Auther weiwenxiao
  */
 data class ResponseData<out T>(val code: Int, val error_msg: String, val data: T)
+
+

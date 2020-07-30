@@ -11,17 +11,19 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.kotlinmodel.R
 import com.example.kotlinmodel.net.ApiException
+import com.example.kotlinmodel.widget.LoadingDialog
 import com.example.kotlinmodel.widget.showToast
 import retrofit2.HttpException
 
 
 abstract class BaseVMFragment<VM : BaseViewModel> : Fragment() {
-    private lateinit var viewModel: VM
+     lateinit var viewModel: VM
     private var isLoading = true
     private var isToast = true
     private var isViewPrepare = false //视图是否加载完毕
     private var hasLoadData = false//数据是否加载过了
-    private lateinit var mContext: Context
+    lateinit var mContext: Context
+    private val loadingDialog by lazy { LoadingDialog(mContext) }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,12 +34,13 @@ abstract class BaseVMFragment<VM : BaseViewModel> : Fragment() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        initVM()
         super.onViewCreated(view, savedInstanceState)
         mContext = activity!!
         isViewPrepare = true
+        initVM()
         initView()
         lazyLoadDataIfPrepared()
+        startObserve()
     }
 
 
@@ -54,7 +57,7 @@ abstract class BaseVMFragment<VM : BaseViewModel> : Fragment() {
             //加载
             getLoad().observe(this@BaseVMFragment, Observer {
                 this@BaseVMFragment.isLoading = it
-//                loadingDialog.show()
+                loadingDialog.show()
             })
 
             //Toast
@@ -76,7 +79,7 @@ abstract class BaseVMFragment<VM : BaseViewModel> : Fragment() {
             })
 
             getEnd().observe(this@BaseVMFragment, Observer {
-
+                loadingDialog.dismiss()
             })
 
         }
@@ -85,10 +88,7 @@ abstract class BaseVMFragment<VM : BaseViewModel> : Fragment() {
 
     private fun initVM() {
         providerVMClass()?.let {
-            viewModel = ViewModelProvider(
-                this,
-                ViewModelProvider.AndroidViewModelFactory.getInstance(activity!!.application)
-            ).get(it)
+            viewModel = ViewModelProvider(this).get(it)
             lifecycle.addObserver(viewModel)
         }
     }

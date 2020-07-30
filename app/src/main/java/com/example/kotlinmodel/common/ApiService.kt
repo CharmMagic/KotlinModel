@@ -1,10 +1,10 @@
 package com.example.kotlinmodel.common
 
 import com.example.kotlinmodel.bean.LoginBean
+import com.example.kotlinmodel.bean.NewsBean
+import com.example.kotlinmodel.bean.WordsBean
 import com.example.kotlinmodel.net.ResponseData
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ApiService {
     @POST(HttpApi.LOGIN)
@@ -16,4 +16,7 @@ interface ApiService {
             "password"
         ) password: String
     ): ResponseData<LoginBean>
+
+    @GET("http://v.juhe.cn/toutiao/index")
+    suspend fun news(@Query("key") key:String): NewsBean
 }

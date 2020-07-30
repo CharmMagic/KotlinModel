@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!--是否允许明文-->
+    <!--<domain-config cleartextTrafficPermitted="false">-->
+        <!--<domain includeSubdomains="true">api-dev.banmacang.com</domain>-->
+        <!--<domain includeSubdomains="true">api-test.banmacang.com</domain>-->
+        <!--<domain includeSubdomains="true">api-demo.banmacang.com</domain>-->
+        <!--<domain includeSubdomains="true">api-prod.banmacang.com</domain>-->
+        <!--<domain includeSubdomains="true">api.banmacang.com</domain>-->
+    <!--</domain-config>-->
+    <base-config cleartextTrafficPermitted="true" />
+
+    <debug-overrides cleartextTrafficPermitted="true">
+        <!--信赖颁发的文件-->
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </debug-overrides>
+</network-security-config>

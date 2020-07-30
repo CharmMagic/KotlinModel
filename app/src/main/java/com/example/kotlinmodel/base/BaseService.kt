@@ -19,4 +19,7 @@ open class BaseService {
             }
         }
     }
+    suspend fun <T : Any> requestT(call: suspend () -> T): T {
+        return withContext(Dispatchers.IO) { call.invoke() }
+    }
 }

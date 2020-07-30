@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fafafa">
+
+    <View
+        android:id="@+id/view_bg"
+        android:layout_width="match_parent"
+        android:layout_height="236dp"
+        android:background="#fa6400"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="74dp"
+        android:src="@mipmap/ic_my"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="普通用户"
+        android:textColor="@color/cl_ffffff"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_head" />
+
+    <TextView
+        android:id="@+id/tv_update"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/cl_ffffff"
+        android:drawableLeft="@mipmap/ic_update"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="12dp"
+        android:text="检查更新"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/view_bg" />
+
+    <TextView
+        android:id="@+id/tv_clean"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/cl_ffffff"
+        android:drawableLeft="@mipmap/ic_clean"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="12dp"
+        android:text="清除缓存"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/tv_update" />
+
+    <TextView
+        android:id="@+id/tv_res"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/cl_ffffff"
+        android:drawableLeft="@mipmap/ic_res"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="12dp"
+        android:text="免责声明"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/tv_clean" />
+    <TextView
+        android:id="@+id/tv_privacy"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/cl_ffffff"
+        android:drawableLeft="@mipmap/ic_privacy"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="12dp"
+        android:text="隐私政策"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/tv_res" />
+
+    <TextView
+        android:id="@+id/tv_cache_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="12dp"
+        android:text="22.4MB"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_clean"
+        app:layout_constraintRight_toRightOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

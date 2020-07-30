@@ -19,20 +19,9 @@ class ExampleUnitTest {
 
     @Test
     fun action() {
-        val a = 3.0
-        val b = 4.0
-        val c = a*a +b*b
-        val d:Double = 4.2389
-        var e = arrayListOf<String>().apply {
-            add("1")
-            add("2")
-            add("3")
-            add("4")
-            add("5")
-        }
-        e.drop(1).flatMap { arrayListOf(it) }.forEach {
-            println(it)
-        }
+        val a = "JH7504283ab700e39a88c23aaaa7e3829f"
+        val b = "10da3bffd098433cf23d1090304499b8"
+        print("a的长度${a.length} b的长度${b.length}")
 
 
     }

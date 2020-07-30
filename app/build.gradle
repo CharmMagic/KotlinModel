@@ -8,7 +8,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.example.kotlinmodel"
+        applicationId "com.love.cow"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -37,6 +37,8 @@ android {
 
 
 dependencies {
+    implementation project(path: ':BGABannerLibrary')
+    implementation project(path: ':mywebview')
     def lifecycle_version = '2.2.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

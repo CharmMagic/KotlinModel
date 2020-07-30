@@ -13,11 +13,10 @@ class SplashActivity : BaseActivity() {
     override fun initView() {
         val mUri = Uri.parse("android.resource://" + packageName + "/" + R.raw.intro)
         vv.setVideoURI(mUri)
-        vv.start()
-
+        startActivity<MainActivity>()
+        finish()
         vv.setOnCompletionListener {
-            startActivity<MainActivity>()
-            finish()
+
         }
     }
 

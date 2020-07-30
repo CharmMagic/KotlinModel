@@ -1,18 +1,20 @@
 package com.example.kotlinmodel.base
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.kotlinmodel.R
 import com.example.kotlinmodel.net.ApiException
+import com.example.kotlinmodel.utils.BarUtils
 import com.example.kotlinmodel.widget.LoadingDialog
 import com.example.kotlinmodel.widget.showToast
 import retrofit2.HttpException
 
 
 abstract class BaseVMActivity<VM : BaseViewModel> : AppCompatActivity() {
-    private lateinit var viewModel: VM
+     lateinit var viewModel: VM
     private var isLoading = true
     private var isToast = true
     private val loadingDialog by lazy { LoadingDialog(this) }
@@ -20,6 +22,8 @@ abstract class BaseVMActivity<VM : BaseViewModel> : AppCompatActivity() {
         initVM()
         super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
+        BarUtils.setStatusBarColor(this, Color.TRANSPARENT)
+        BarUtils.setStatusBarLightMode(this, true)
         initView()
         initData()
         startObserve()
@@ -42,7 +46,7 @@ abstract class BaseVMActivity<VM : BaseViewModel> : AppCompatActivity() {
             //加载
             getLoad().observe(this@BaseVMActivity, Observer {
                 this@BaseVMActivity.isLoading = it
-//                loadingDialog.show()
+                loadingDialog.show()
             })
 
             //Toast

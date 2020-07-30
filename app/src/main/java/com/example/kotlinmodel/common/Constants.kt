@@ -16,5 +16,7 @@ class Constants private constructor(){
        const val  SYS_VERSION  = "V0.6.4"
         //登录加密前缀
         const val USER_PASSWORD_PREFIX = "bmc-gyl:"
+        const val HTML_URL = "HTML_URL"
+        const val TITLE = "TITLE"
     }
 }
